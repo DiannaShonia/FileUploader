@@ -1,5 +1,12 @@
+import Layout from './components/Layout'
+import FileManager from './FileManager'
+
 function App() {
-  return <div>test</div>
+  return (
+    <Layout>
+      <FileManager />
+    </Layout>
+  )
 }
 
 export default App
