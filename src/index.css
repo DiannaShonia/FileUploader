@@ -4,7 +4,7 @@
   --color-background: #121315;
   --color-Bg: #121315;
   --color-Primary: #fff;
-  --color-Primary-006: hsla(0, 0%, 100%, 0.06);
+  --color-Primary-006: hsla(0, 0%, 100%, 0.6);
   --color-Secondary: hsla(0, 0%, 100%, 0.6);
   --color-Dark: #1b1c1d;
   --color-DarkLight: #2d2e2f;
@@ -14,31 +14,42 @@
   --color-CardBg: #1b1c1d;
   --color-Line: hsla(0, 0%, 100%, 0.2);
   --color-toastifyBg: #252526;
+  --color-Default: #1b1c1d;
+  --font-Secondary: 'Courier New', Courier, monospace;
+  --font-Primary: sans-serif;
 }
 
 .filepond--root .filepond--panel-root {
   background-color: #1b1c1d !important;
-}
-
-.filepond--item {
-  width: calc(20% - 0.5em) !important;
+  display: flex !important;
+  justify-content: center !important;
 }
 
 .filepond--root .filepond--drop-label {
-  color: rgba(197, 252, 252, 0.7) !important;
+  color: hsla(0, 0%, 100%, 0.6) !important;
+  font-size: 13px;
+  border: dashed 1px hsla(0, 0%, 100%, 0.2);
+  border-radius: 16px;
+  height: 180px;
+}
+.filepond--root .filepond--drop-label label {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.filepond--root .filepond--drop-label svg {
+  width: 50px;
+  fill: hsla(0, 0%, 100%, 0.6);
+  margin-bottom: 15px;
 }
 
 .scroll-container {
-  scrollbar-width: thin;
+  scrollbar-width: none;
   scrollbar-color: #121315 #1b1c1d;
 }
 
 ::-webkit-scrollbar {
   width: 122px;
-}
-
-::-webkit-scrollbar-button {
-  display: none !important;
-  width: 0;
-  height: 0;
 }

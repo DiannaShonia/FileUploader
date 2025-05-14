@@ -1,10 +1,10 @@
 import Layout from './components/Layout'
-import FileManager from './FileManager'
+import Dashboard from './Dashboard'
 
 function App() {
   return (
     <Layout>
-      <FileManager />
+      <Dashboard />
     </Layout>
   )
 }
