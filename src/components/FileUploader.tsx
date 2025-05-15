@@ -33,6 +33,7 @@ const FileUploader = ({
         files={files}
         allowMultiple={allowMultiple}
         onupdatefiles={(fileItems: FilePondFile[]) => {
+          console.log(fileItems[0]?.source, 'fileItems in filepond')
           setFiles(fileItems.map((fileItem) => fileItem.file as File))
         }}
         disabled={disabled}
@@ -42,7 +43,6 @@ const FileUploader = ({
         labelIdle={label || defaultLabel}
         credits={false}
         acceptedFileTypes={['image/*']}
-        server={'/api'}
       />
     </div>
   )
