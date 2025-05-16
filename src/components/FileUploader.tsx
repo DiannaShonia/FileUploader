@@ -4,6 +4,7 @@ import type { FilePondFile } from 'filepond'
 
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import { useStore } from '../store/store'
+import { mockFiles } from '../utils/mockFiles'
 
 interface FileUploaderProps {
   allowMultiple: boolean
@@ -24,18 +25,33 @@ const FileUploader = ({
   allowReorder,
   label,
 }: FileUploaderProps) => {
-  const files = useStore((state) => state.files)
-  const setFiles = useStore((state) => state.setFiles)
+  const uploadedFiles = useStore((state) => state.uploadedFiles)
+  const setUploadedFiles = useStore((state) => state.setUploadedFiles)
+  const setAllFiles = useStore((state) => state.setAllFiles)
+
+  const handleFileUpdate = (fileItems: FilePondFile[]) => {
+    setAllFiles(
+      fileItems.map((fileItem, index) => ({
+        lastModified: fileItem.file.lastModified,
+        name: fileItem.file.name,
+        size: fileItem.file.size,
+        type: fileItem.file.type,
+        altText: '',
+        source: '',
+        sortIndex: '',
+        key: fileItem.file.name,
+        id: (mockFiles.length + index + 1).toString(),
+      }))
+    )
+    setUploadedFiles(fileItems.map((fileItem) => fileItem.file as File))
+  }
 
   return (
     <div className="w-full h-full ">
       <FilePond
-        files={files}
+        files={uploadedFiles}
         allowMultiple={allowMultiple}
-        onupdatefiles={(fileItems: FilePondFile[]) => {
-          console.log(fileItems[0]?.source, 'fileItems in filepond')
-          setFiles(fileItems.map((fileItem) => fileItem.file as File))
-        }}
+        onupdatefiles={handleFileUpdate}
         disabled={disabled}
         required={required}
         allowReorder={allowReorder}
@@ -43,6 +59,7 @@ const FileUploader = ({
         labelIdle={label || defaultLabel}
         credits={false}
         acceptedFileTypes={['image/*']}
+        allowRemove={false}
       />
     </div>
   )

@@ -9,9 +9,11 @@
   --color-Dark: #1b1c1d;
   --color-DarkLight: #2d2e2f;
   --color-Error: #a54242;
+  --color-ErrorDark: #8f3a3a;
   --color-Success: #358536;
   --color-Brand: #c5fcfc;
   --color-CardBg: #1b1c1d;
+  --color-CardBgLight: #2a2b2c;
   --color-Line: hsla(0, 0%, 100%, 0.2);
   --color-toastifyBg: #252526;
   --color-Default: #1b1c1d;

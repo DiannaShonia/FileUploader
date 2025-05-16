@@ -1,11 +1,24 @@
 import { create } from 'zustand'
+import type { FileData } from '../types'
 
 interface State {
-  files: File[]
-  setFiles: (files: File[]) => void
+  allFiles: FileData[]
+  uploadedFiles: File[]
+  filteredData: FileData[]
+  setAllFiles: (files: FileData[]) => void
+  setUploadedFiles: (files: File[]) => void
+  setFilteredData: (files: FileData[]) => void
 }
 
 export const useStore = create<State>()((set) => ({
-  files: [],
-  setFiles: (data) => set({ files: data }),
+  allFiles: [],
+  uploadedFiles: [],
+  filteredData: [],
+  setAllFiles: (data) => set({ allFiles: data }),
+  setUploadedFiles: (data) => set({ uploadedFiles: data }),
+  setFilteredData: (data) =>
+    set((state) => ({
+      ...state,
+      filteredData: data,
+    })),
 }))

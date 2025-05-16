@@ -4,7 +4,7 @@ import { useStore } from './store/store'
 import { mockFiles } from './utils/mockFiles'
 
 const Dashboard = () => {
-  const files = useStore((state) => state.files)
+  const files = useStore((state) => state.allFiles)
   return (
     <div className=" w-full h-full flex flex-col  ">
       <div className="flex w-full h-3/12">
