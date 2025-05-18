@@ -4,7 +4,6 @@ import type { FilePondFile } from 'filepond'
 
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import { useStore } from '../store/store'
-import { mockFiles } from '../utils/mockFiles'
 
 interface FileUploaderProps {
   allowMultiple: boolean
@@ -28,6 +27,7 @@ const FileUploader = ({
   const uploadedFiles = useStore((state) => state.uploadedFiles)
   const setUploadedFiles = useStore((state) => state.setUploadedFiles)
   const setAllFiles = useStore((state) => state.setAllFiles)
+  const mockFiles = useStore((state) => state.mockFiles)
 
   const handleFileUpdate = (fileItems: FilePondFile[]) => {
     setAllFiles(
@@ -59,7 +59,7 @@ const FileUploader = ({
         labelIdle={label || defaultLabel}
         credits={false}
         acceptedFileTypes={['image/*']}
-        allowRemove={false}
+        // allowRemove={false}
       />
     </div>
   )

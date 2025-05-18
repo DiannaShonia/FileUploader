@@ -18,7 +18,6 @@ import {
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { useStore } from '../../store/store'
-import { mockFiles } from '../../utils/mockFiles'
 import { columns } from './AllFilesPreview.constants'
 import type { FileData } from '../../types'
 
@@ -77,12 +76,14 @@ const AllFilesPreview: React.FC = () => {
   const allFiles = useStore((state) => state.allFiles)
   const setFilteredData = useStore((state) => state.setFilteredData)
   const filteredData = useStore((state) => state.filteredData)
+  const mockFiles = useStore((state) => state.mockFiles)
 
   useEffect(() => {
     const updatedData = [...allFiles, ...mockFiles]
     console.log('Updated filteredData:', updatedData)
     setFilteredData(updatedData)
-  }, [allFiles, setFilteredData])
+    localStorage.setItem('files', JSON.stringify(updatedData))
+  }, [allFiles, mockFiles, setFilteredData])
 
   const handleSearch = (searchText: string) => {
     const filteredFiles = [...allFiles, ...mockFiles].filter((file) =>

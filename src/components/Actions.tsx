@@ -1,17 +1,24 @@
 import { HeartOutlined, DeleteOutlined } from '@ant-design/icons'
 import { useStore } from '../store/store'
 import type { FileData } from '../types'
+import { mockData } from '../utils/mockFiles'
 
 interface ActionsProps {
   data: FileData
 }
 
 const Actions = ({ data }: ActionsProps) => {
-  const filteredData = useStore((state) => state.filteredData)
-  const setFilteredData = useStore((state) => state.setFilteredData)
+  const allFiles = useStore((state) => state.allFiles)
+  const setAllFiles = useStore((state) => state.setAllFiles)
+  const mockFiles = useStore((state) => state.mockFiles)
+  const setMockFiles = useStore((state) => state.setMockFiles)
 
   const handleDeleteFile = () => {
-    setFilteredData(filteredData.filter((file) => file.id !== data.id))
+    if (Number(data.id) > mockData.length) {
+      setAllFiles(allFiles.filter((file) => file.id !== data.id))
+    } else {
+      setMockFiles(mockFiles.filter((file) => file.id !== data.id))
+    }
   }
 
   return (

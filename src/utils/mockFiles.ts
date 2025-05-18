@@ -1,4 +1,4 @@
-export const mockFiles = [
+export const mockData = [
   {
     id: '1',
     lastModified: 1743678633288,
