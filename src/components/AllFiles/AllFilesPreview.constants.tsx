@@ -16,6 +16,18 @@ export const columns: any = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
+    render: (_, data: FileData) => (
+      <div className="flex items-center">
+        {data.source ? (
+          <img
+            className="object-cover w-16 h-11 object-top rounded-lg mr-2"
+            src={data.source}
+            alt=""
+          />
+        ) : null}
+        <p className="truncate w-28">{data.name}</p>
+      </div>
+    ),
   },
   {
     title: 'Type',
@@ -42,13 +54,15 @@ export const columns: any = [
     dataIndex: 'altText',
     key: 'altText',
     editable: true,
-    render: (text: string) => <Input value={text} />,
+    render: (text: string, record: FileData) => (
+      <Input value={text} id={record.id} />
+    ),
   },
   {
     title: 'Action',
     dataIndex: 'Action',
     key: 'Action',
-    render: (_: any, record: FileData) => <Actions data={record} />,
+    render: (_: any, record: FileData) => <Actions record={record} />,
     align: 'center',
   },
 ]

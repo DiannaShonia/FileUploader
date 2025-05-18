@@ -80,9 +80,7 @@ const AllFilesPreview: React.FC = () => {
 
   useEffect(() => {
     const updatedData = [...allFiles, ...mockFiles]
-    console.log('Updated filteredData:', updatedData)
     setFilteredData(updatedData)
-    localStorage.setItem('files', JSON.stringify(updatedData))
   }, [allFiles, mockFiles, setFilteredData])
 
   const handleSearch = (searchText: string) => {
@@ -93,7 +91,6 @@ const AllFilesPreview: React.FC = () => {
           )
         : false
     )
-    console.log('Filtered files:', filteredFiles)
     setFilteredData(filteredFiles)
   }
 
@@ -118,8 +115,6 @@ const AllFilesPreview: React.FC = () => {
   const components = {
     body: {
       row: (props: any) => {
-        console.log(props, '~~~~ here ~~~')
-
         const rowKey = props['data-row-key']
         if (!rowKey) {
           return null

@@ -4,7 +4,8 @@
   --color-background: #121315;
   --color-Bg: #121315;
   --color-Primary: #fff;
-  --color-Primary-006: hsla(0, 0%, 100%, 0.6);
+  --color-Primary-06: hsla(0, 0%, 100%, 0.6);
+  --color-Primary-09: hsla(0, 0%, 100%, 0.9);
   --color-Secondary: hsla(0, 0%, 100%, 0.6);
   --color-Dark: #1b1c1d;
   --color-DarkLight: #2d2e2f;
@@ -15,6 +16,7 @@
   --color-CardBg: #1b1c1d;
   --color-CardBgLight: #2a2b2c;
   --color-Line: hsla(0, 0%, 100%, 0.2);
+  --color-Line-05: hsla(0, 0%, 100%, 0.3);
   --color-toastifyBg: #252526;
   --color-Default: #1b1c1d;
   --font-Secondary: 'Courier New', Courier, monospace;

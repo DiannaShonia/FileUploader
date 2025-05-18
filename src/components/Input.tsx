@@ -1,28 +1,49 @@
 import { CheckCircleOutlined } from '@ant-design/icons'
 import { useState } from 'react'
+import { useStore } from '../store/store'
 
 interface InputProps {
-  value: string
+  value?: string
+  id: string
 }
 
-const Input = ({ value }: InputProps) => {
-  const [isFocused, setIsFocused] = useState<boolean>(false)
+const Input = ({ value, id }: InputProps) => {
+  const [altText, setAltText] = useState(value || '')
+  const [isFocused, setIsFocused] = useState(false)
+
+  const allFiles = useStore((state) => state.allFiles)
+  const setAllFiles = useStore((state) => state.setAllFiles)
+  const mockFiles = useStore((state) => state.mockFiles)
+  const setMockFiles = useStore((state) => state.setMockFiles)
+
+  const editAltText = () => {
+    setAllFiles(
+      allFiles.map((file) => (file.id === id ? { ...file, altText } : file))
+    )
+    setMockFiles(
+      mockFiles.map((file) => (file.id === id ? { ...file, altText } : file))
+    )
+    setIsFocused(false)
+  }
 
   return (
-    <div className="flex items-center w-full">
+    <div className="flex items-center w-full text-Primary">
       <input
         className={`${!isFocused && value ? 'bg-none' : 'bg-CardBgLight'} focus:outline-none p-2 rounded`}
         type="text"
         placeholder="Add alt text"
-        defaultValue={value}
+        value={altText}
+        onChange={(e) => setAltText(e.target.value)}
         onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
       />
-      <div className="ml-3 bg-CardBgLight">
-        {!value || isFocused ? (
+      <button
+        className="ml-3 z-10 cursor-pointer bg-CardBgLight"
+        onClick={editAltText}
+      >
+        {!altText || isFocused ? (
           <CheckCircleOutlined style={{ color: '#c5fcfc' }} />
         ) : null}
-      </div>
+      </button>
     </div>
   )
 }
