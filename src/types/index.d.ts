@@ -1,4 +1,4 @@
-export interface FileData {
+export interface FileData extends File {
   lastModified: number
   name: string
   size: number

@@ -1,7 +1,7 @@
-import FileUploader from '../components/FileUploader/FileUploader'
-import AllFilesPreview from '../components/AllFiles/AllFilesPreview'
-import { useStore } from '../store/store'
-import { formatBytes } from '../utils/helpers'
+import FileUploader from '@/components/FileUploader/FileUploader'
+import AllFilesPreview from '@/pages/Dashboard/AllFilesPreview'
+import { useStore } from '@/store/store'
+import { formatBytes } from '@/utils/helpers'
 
 const Dashboard = () => {
   const files = useStore((state) => state.allFiles)
@@ -35,7 +35,7 @@ const Dashboard = () => {
               className="scroll-container h-full w-full 
           overflow-auto flex justify-center items-center rounded-2xl"
             >
-              <FileUploader listView iconSize="60px" />
+              <FileUploader iconSize="60px" />
             </div>
           </div>
         </div>

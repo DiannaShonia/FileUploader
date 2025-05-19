@@ -1,9 +1,9 @@
 import { lazy } from 'react'
 import type { RouteObject } from 'react-router-dom'
 
-const Dashboard = lazy(() => import('../pages/Dashboard'))
-const UploadFiles = lazy(() => import('../pages/UploadFiles'))
-const Layout = lazy(() => import('../Layout/Layout'))
+const Dashboard = lazy(() => import('@/pages/Dashboard/Dashboard'))
+const UploadFiles = lazy(() => import('@/pages/UploadFiles/UploadFiles'))
+const Layout = lazy(() => import('@/Layout/Layout'))
 
 const routes: RouteObject[] = [
   {

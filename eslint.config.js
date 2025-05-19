@@ -33,6 +33,7 @@ export default tseslint.config(
       'react/self-closing-comp': 'error',
       'react/jsx-boolean-value': 'error',
       'react/jsx-closing-bracket-location': 2,
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
   }
 )

@@ -1,40 +1,73 @@
 import { useCallback, useState } from 'react'
-import { useDropzone } from 'react-dropzone'
-import FilePreview from './FilePreview'
-import Upload from '../../assets/Icons/Upload'
-import { useStore } from '../../store/store'
+import { useDropzone, type FileRejection } from 'react-dropzone'
+import FilePreviewList from './FilePreviewList'
+import Upload from '@/assets/Icons/Upload'
+import { useStore } from '@/store/store'
+import type { FileData } from '@/types'
+import { toast } from 'react-toastify'
 
 interface FileUploaderProps {
-  listView?: boolean
   iconSize: string
+  multiple?: boolean
+  accept?: Record<string, string[]>
+  maxSize?: number
+  maxFiles?: number
 }
 
-const FileUploader = ({ iconSize, imagesOnly }: FileUploaderProps) => {
+const FileUploader = ({
+  iconSize,
+  accept,
+  multiple,
+  maxSize,
+  maxFiles,
+}: FileUploaderProps) => {
   const [isDragOver, setIsDragOver] = useState(false)
-  const [files, setFiles] = useState<File[]>([])
+  const [files, setFiles] = useState<FileData[]>([])
   const setAllFiles = useStore((state) => state.setAllFiles)
   const allFiles = useStore((state) => state.allFiles)
 
   const onDrop = useCallback(
-    (acceptedFiles) => {
-      const fileData = acceptedFiles.map((file, index) => ({
-        ...file,
-        source: file.type.includes('image') ? URL.createObjectURL(file) : '',
-        id: `${file.name + index + 1}`,
-        key: `${file.name + index + 1}`,
-        altText: '',
-        type: file.type,
-        lastModified: file.lastModified,
-        size: file.size,
-        name: file.name,
-      }))
+    (acceptedFiles: File[]) => {
+      const newFiles: FileData[] = []
+      const allFileNames = new Set(allFiles.map((file) => file.name))
+
+      acceptedFiles.forEach((file: File, index: number) => {
+        if (!allFileNames.has(file.name)) {
+          const fileData: FileData = {
+            ...file,
+            source: file.type.includes('image')
+              ? URL.createObjectURL(file)
+              : '',
+            id: `${file.name + index + 1}`,
+            key: `${file.name + index + 1}`,
+            altText: '',
+            type: file.type,
+            lastModified: file.lastModified,
+            size: file.size,
+            name: file.name,
+            sortIndex: '',
+          }
+          newFiles.push(fileData)
+          allFileNames.add(file.name)
+        } else {
+          toast.error(`File "${file.name}" already exists.`)
+        }
+      })
 
       setIsDragOver(false)
-      setAllFiles([...fileData, ...allFiles])
-      setFiles(fileData)
+      setAllFiles([...newFiles, ...allFiles])
+      setFiles(newFiles)
     },
     [allFiles, setAllFiles]
   )
+
+  const onDropRejected = (fileRejections: FileRejection[]) => {
+    fileRejections.forEach(({ file, errors }) => {
+      errors.forEach((error) => {
+        toast.error(` ${file.name} - ${error.message}`)
+      })
+    })
+  }
 
   const onDragOver = () => {
     setIsDragOver(true)
@@ -44,13 +77,16 @@ const FileUploader = ({ iconSize, imagesOnly }: FileUploaderProps) => {
     setIsDragOver(false)
   }
 
+  // Max Files are per drop. Max size is per file
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     onDragOver,
     onDragLeave,
-    accept: imagesOnly && {
-      'image/*': [],
-    },
+    onDropRejected,
+    accept,
+    maxSize,
+    maxFiles,
+    multiple,
   })
 
   return (
@@ -83,7 +119,7 @@ const FileUploader = ({ iconSize, imagesOnly }: FileUploaderProps) => {
       {files.length ? (
         <div className="h-3/4">
           {files.length ? (
-            <FilePreview setFiles={setFiles} files={files} />
+            <FilePreviewList setFiles={setFiles} files={files} />
           ) : null}
         </div>
       ) : null}

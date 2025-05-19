@@ -1,6 +1,6 @@
 import { DeleteOutlined, EyeOutlined } from '@ant-design/icons'
-import { useStore } from '../store/store'
-import type { FileData } from '../types'
+import { useStore } from '@/store/store'
+import type { FileData } from '@/types'
 
 interface ActionsProps {
   record: FileData

@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { formatBytes, formatDate } from '../../utils/helpers'
-import Input from '../../components/Input'
-import Actions from '../Actions'
+import { formatBytes, formatDate } from '@/utils/helpers'
+import Input from '@/components/Input/Input'
+import Actions from '@/pages/Dashboard/Actions'
 import { HolderOutlined } from '@ant-design/icons'
-import type { FileData } from '../../types'
+import type { FileData } from '@/types'
 
 export const columns: any = [
   {
@@ -16,7 +15,7 @@ export const columns: any = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    render: (_, data: FileData) => (
+    render: (_: string, data: FileData) => (
       <div className="flex items-center">
         {data.source ? (
           <img
@@ -62,7 +61,7 @@ export const columns: any = [
     title: 'Action',
     dataIndex: 'Action',
     key: 'Action',
-    render: (_: any, record: FileData) => <Actions record={record} />,
+    render: (_: never, record: FileData) => <Actions record={record} />,
     align: 'center',
   },
 ]

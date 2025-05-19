@@ -4,7 +4,7 @@ import { mockData } from '../utils/mockFiles'
 
 interface State {
   allFiles: FileData[]
-  mockFiles: FileData[]
+  mockFiles: any[]
   uploadedFiles: File[]
   filteredData: FileData[]
   setAllFiles: (files: FileData[]) => void

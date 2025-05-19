@@ -1,9 +1,9 @@
-import FileUploader from '../components/FileUploader/FileUploader'
+import FileUploader from '@/components/FileUploader/FileUploader'
 
 const UploadFiles = () => {
   return (
     <div className="w-full h-full flex flex-col bg-CardBg rounded-2xl">
-      <FileUploader iconSize="80px" />
+      <FileUploader iconSize="80px" multiple />
     </div>
   )
 }

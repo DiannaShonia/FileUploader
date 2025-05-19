@@ -1,13 +1,14 @@
 import { CheckCircleOutlined } from '@ant-design/icons'
 import { useState } from 'react'
-import { useStore } from '../store/store'
+import { useStore } from '@/store/store'
 
 interface InputProps {
   value?: string
   id: string
+  backgroundColor?: string
 }
 
-const Input = ({ value, id }: InputProps) => {
+const Input = ({ value, id, backgroundColor }: InputProps) => {
   const [altText, setAltText] = useState(value || '')
   const [isFocused, setIsFocused] = useState(false)
 
@@ -29,7 +30,7 @@ const Input = ({ value, id }: InputProps) => {
   return (
     <div className="flex items-center w-full text-Primary">
       <input
-        className={`${!isFocused && value ? 'bg-none' : 'bg-CardBgLight'} focus:outline-none p-2 rounded`}
+        className={`${!isFocused && altText ? 'bg-none' : backgroundColor || 'bg-CardBg'} focus:outline-none p-2 rounded`}
         type="text"
         placeholder="Add alt text"
         value={altText}
